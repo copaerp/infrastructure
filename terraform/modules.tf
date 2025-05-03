@@ -4,3 +4,8 @@ module "n8n" {
   key_name    = var.key_name
   iam_role_id = var.iam_role_id
 }
+
+module "route53" {
+  source         = "./modules/route53"
+  n8n_elastic_ip = module.n8n.n8n_elastic_ip
+}

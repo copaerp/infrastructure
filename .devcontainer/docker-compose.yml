@@ -1,8 +1,8 @@
-name: infra-orchestrator
+name: copaerp-infrastructure
 version: '3.8'
 services:
   devcontainer:
-    container_name: infra-orchestrator
+    container_name: copaerp-infrastructure
     image: mcr.microsoft.com/devcontainers/base:bullseye
     volumes:
       - ../..:/workspaces:cached

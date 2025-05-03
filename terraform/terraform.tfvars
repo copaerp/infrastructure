@@ -1,1 +1,1 @@
-solution_name="example"
+solution_name="copaerp"

@@ -16,5 +16,39 @@
 4. **CI/CD Setup**
    - Add the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `AWS_SESSION_TOKEN` secrets to your repository to enable CI/CD workflows
 
-5. **Ready to Go**
+5. **Domain Configuration**
+   - After deployment, update your domain registrar's settings with the name servers provided in the Terraform outputs
+   - The following domains are configured:
+     - `copa-erp.site`: Basic hosted zone with NS and SOA records
+     - `copaerp.site`: Hosted zone with n8n application configured at `n8n.copaerp.site`
+
+6. **Ready to Go**
    - The infrastructure is now ready for use. Just push something to `./terraform`
+
+## Modules
+
+The infrastructure is organized into the following modules:
+
+1. **n8n**: Deploys an EC2 instance running the n8n workflow automation platform
+2. **route53**: Manages DNS configurations for Copa ERP domains including hosted zones and records
+
+## Outputs
+
+After deployment, the following outputs are available:
+
+- `n8n_elastic_ip`: The public IP address of the n8n instance
+- `n8n_domain`: The fully qualified domain name for the n8n application
+- `n8n_subdomain`: Just the subdomain portion for n8n (without the TLD)
+- `copa_erp_site_name_servers`: Name servers for the copa-erp.site domain
+- `copaerp_site_name_servers`: Name servers for the copaerp.site domain
+- `copa_erp_site_ns_formatted` and `copaerp_site_ns_formatted`: Formatted name servers for easy copying
+- `parameter_store_paths`: Paths to all stored parameters in AWS Parameter Store
+
+## AWS Parameter Store
+
+This infrastructure saves the following parameters to AWS Parameter Store:
+
+- `/copa-erp/domains/n8n`: The full domain for n8n application (n8n.copaerp.site)
+- `/copa-erp/domains/n8n-subdomain`: Just the subdomain portion (n8n)
+
+These parameters can be accessed by other applications or services that need to know the domain configuration.
