@@ -1,0 +1,5 @@
+default-key.pem
+terraform-state
+.terraform**
+**.env
+bootstrap-setup-**
