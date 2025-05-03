@@ -2,14 +2,12 @@ provider "aws" {
   region = var.aws_region
 }
 
-variable "solution_name" {}
-
 terraform {
   backend "s3" {
-    bucket         = "${var.solution_name}-terraform-lock"
+    bucket         = "copaerp-terraform-lock"
     key            = "terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "${var.solution_name}-terraform-lock"
+    dynamodb_table = "copaerp-terraform-lock"
     encrypt        = true
   }
 }

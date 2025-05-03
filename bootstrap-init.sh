@@ -22,7 +22,6 @@ TEMP_DIR=$(mktemp -d -p . bootstrap-setup-XXXXXX)
 trap 'cd .. && rm -rf ${TEMP_DIR}' EXIT
 
 cp ./bootstrap.tf ${TEMP_DIR}/main.tf
-cp ./terraform/terraform.tfvars ${TEMP_DIR}/terraform.tfvars
 
 cd ${TEMP_DIR}
 
