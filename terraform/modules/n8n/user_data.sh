@@ -24,7 +24,7 @@ if [ ! -f /var/log/first_boot_done ]; then
 
     git clone https://github.com/copaerp/n8n.git && cd ./n8n/
 
-    echo "DOMAIN_NAME=$DOMAIN_NAME" > .env
+    echo "DOMAIN_NAME=$DOMAIN_NAME" >> .env
     echo "SUBDOMAIN=$SUBDOMAIN" >> .env
 
     docker volume create n8n_data
