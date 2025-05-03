@@ -2,6 +2,8 @@ provider "aws" {
   region = var.aws_region
 }
 
+variable "solution_name" {}
+
 terraform {
   backend "s3" {
     bucket         = "${var.solution_name}-terraform-lock"

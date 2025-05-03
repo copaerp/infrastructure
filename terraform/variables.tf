@@ -13,5 +13,3 @@ variable "ami_id" {
 variable "iam_role_id" {
   default = "LabRole"
 }
-
-variable "solution_name" {}
