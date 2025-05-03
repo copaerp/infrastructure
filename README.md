@@ -48,7 +48,18 @@ After deployment, the following outputs are available:
 
 This infrastructure saves the following parameters to AWS Parameter Store:
 
-- `/copa-erp/domains/n8n`: The full domain for n8n application (n8n.copaerp.site)
+- `/copa-erp/domains/root`: The root domain (copaerp.site)
 - `/copa-erp/domains/n8n-subdomain`: Just the subdomain portion (n8n)
 
 These parameters can be accessed by other applications or services that need to know the domain configuration.
+
+## Integração Automática com n8n
+
+O módulo n8n foi configurado para utilizar automaticamente os parâmetros do AWS Parameter Store:
+
+1. Durante a inicialização da instância EC2, o script recupera os parâmetros do AWS Parameter Store
+2. Os valores recuperados são adicionados ao arquivo `.env` no diretório `./n8n-local-container/src/`
+3. Isso configura automaticamente o n8n com o domínio correto sem necessidade de intervenção manual
+4. Os seguintes parâmetros são configurados no arquivo `.env`:
+   - `DOMAIN_NAME`: Valor de `/copa-erp/domains/root` (copaerp.site)
+   - `SUBDOMAIN`: Valor de `/copa-erp/domains/n8n-subdomain` (n8n)
