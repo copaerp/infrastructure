@@ -8,7 +8,7 @@ locals {
 resource "aws_lambda_function" "channel_dispatcher" {
   function_name = "channel-dispatcher"
 
-  role     = var.iam_role_id
+  role     = data.aws_iam_role.existing_role.arn
   handler  = local.lambda_handler
   runtime  = local.lambda_runtime
   filename = local.dummy_source_file
@@ -22,7 +22,7 @@ resource "aws_lambda_function" "channel_dispatcher" {
 resource "aws_lambda_function" "message_standardizer" {
   function_name = "message-standardizer"
 
-  role     = var.iam_role_id
+  role     = data.aws_iam_role.existing_role.arn
   handler  = local.lambda_handler
   runtime  = local.lambda_runtime
   filename = local.dummy_source_file
@@ -36,7 +36,7 @@ resource "aws_lambda_function" "message_standardizer" {
 resource "aws_lambda_function" "frontend_bridge" {
   function_name = "frontend-bridge"
 
-  role     = var.iam_role_id
+  role     = data.aws_iam_role.existing_role.arn
   handler  = local.lambda_handler
   runtime  = local.lambda_runtime
   filename = local.dummy_source_file
