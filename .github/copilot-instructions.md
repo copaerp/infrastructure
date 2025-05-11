@@ -1,0 +1,4 @@
+- Não adicione comentários ou explicações ao código.
+- Não adicione novos README.md ou arquivos de documentação.
+- Sempre use a role definida na variável `iam_role_id`, nunca crie uma nova role ou policy.
+- A infraestrutura está no diretório `terraform/`, separada por módulos, dentro da pasta `terraform/modules/`
