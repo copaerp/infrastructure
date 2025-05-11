@@ -2,7 +2,7 @@ locals {
   lambda_handler       = "bootstrap"
   lambda_runtime       = "provided.al2023"
   lambda_architectures = ["arm64"]
-  dummy_source_file    = "${path.root}/dummy_bootstrap"
+  dummy_source_file    = "${path.root}/dummy_bootstrap.zip"
 }
 
 resource "aws_lambda_function" "channel_dispatcher" {
