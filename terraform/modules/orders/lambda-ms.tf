@@ -37,17 +37,17 @@ resource "aws_lambda_permission" "message_standardizer_permission" {
   source_arn    = "${aws_apigatewayv2_api.message_standardizer_api.execution_arn}/*/*"
 }
 
-resource "aws_apigatewayv2_domain_name" "message_standardizer_domain" {
-  domain_name = "ms.api.copaerp.site"
+# resource "aws_apigatewayv2_domain_name" "message_standardizer_domain" {
+#   domain_name = "ms.api.copaerp.site"
 
-  domain_name_configuration {
-    certificate_arn = aws_acm_certificate.api_cert.arn
-    endpoint_type   = "REGIONAL"
-    security_policy = "TLS_1_2"
-  }
+#   domain_name_configuration {
+#     certificate_arn = aws_acm_certificate.api_cert.arn
+#     endpoint_type   = "REGIONAL"
+#     security_policy = "TLS_1_2"
+#   }
 
-  depends_on = [aws_acm_certificate_validation.api_cert_validation]
-}
+#   depends_on = [aws_acm_certificate_validation.api_cert_validation]
+# }
 
 resource "aws_apigatewayv2_api_mapping" "message_standardizer_mapping" {
   api_id      = aws_apigatewayv2_api.message_standardizer_api.id
@@ -55,10 +55,10 @@ resource "aws_apigatewayv2_api_mapping" "message_standardizer_mapping" {
   stage       = aws_apigatewayv2_stage.message_standardizer_stage.id
 }
 
-resource "aws_acm_certificate_validation" "api_cert_validation" {
-  certificate_arn         = aws_acm_certificate.api_cert.arn
-  validation_record_fqdns = [for record in aws_route53_record.api_validation : record.fqdn]
-}
+# resource "aws_acm_certificate_validation" "api_cert_validation" {
+#   certificate_arn         = aws_acm_certificate.api_cert.arn
+#   validation_record_fqdns = [for record in aws_route53_record.api_validation : record.fqdn]
+# }
 
 output "message_standardizer_api_endpoint" {
   value = "https://${aws_apigatewayv2_domain_name.message_standardizer_domain.domain_name}"
@@ -66,38 +66,40 @@ output "message_standardizer_api_endpoint" {
 
 # ACM
 
-resource "aws_acm_certificate" "api_cert" {
-  domain_name       = "ms.api.copaerp.site"
-  validation_method = "DNS"
+# resource "aws_acm_certificate" "api_cert" {
+#   domain_name       = "ms.api.copaerp.site"
+#   validation_method = "DNS"
 
-  lifecycle {
-    create_before_destroy = true
-  }
+#   lifecycle {
+#     create_before_destroy = true
+#   }
 
-  tags = {
-    Name        = "message-standardizer-api-cert"
-    Environment = "production"
-    Managed-by  = "terraform"
-  }
-}
+#   tags = {
+#     Name        = "message-standardizer-api-cert"
+#     Environment = "production"
+#     Managed-by  = "terraform"
+#   }
+# }
 
 # DNS Validation
 
-resource "aws_route53_record" "api_validation" {
-  for_each = {
-    for dvo in aws_acm_certificate.api_cert.domain_validation_options : dvo.domain_name => {
-      name   = dvo.resource_record_name
-      record = dvo.resource_record_value
-      type   = dvo.resource_record_type
-    }
-  }
+# resource "aws_route53_record" "api_validation" {
+#   for_each = {
+#     for dvo in aws_acm_certificate.api_cert.domain_validation_options : dvo.domain_name => {
+#       name   = dvo.resource_record_name
+#       record = dvo.resource_record_value
+#       type   = dvo.resource_record_type
+#     }
+#   }
 
-  zone_id = var.route53_zone_id
-  name    = each.value.name
-  type    = each.value.type
-  records = [each.value.record]
-  ttl     = 60
-}
+#   zone_id = var.route53_zone_id
+#   name    = each.value.name
+#   type    = each.value.type
+#   records = [each.value.record]
+#   ttl     = 60
+# }
+
+# Route53 Record
 
 resource "aws_route53_record" "api_domain" {
   zone_id = var.route53_zone_id
