@@ -2,8 +2,8 @@ resource "aws_db_instance" "copa_db" {
   allocated_storage    = 20
   storage_type         = "gp2"
   engine               = "postgres"
-  engine_version       = "15.4"  
-  instance_class       = "db.t3.micro"
+  engine_version       = "15.3"  
+  instance_class       = "db.t2.micro"
   db_name              = "copadb"
   username             = "admin"
   password             = "#Urubu100"
