@@ -1,0 +1,21 @@
+resource "aws_db_instance" "copa_db" {
+  allocated_storage    = 20
+  storage_type         = "gp2"
+  engine               = "postgres"
+  engine_version       = "15.4"  
+  instance_class       = "db.t3.micro"
+  name                 = "copadb"
+  username             = "admin"
+  password             = "#Urubu100"
+  parameter_group_name = "default.copadb"
+  skip_final_snapshot  = true
+  publicly_accessible  = false
+  multi_az             = false
+  backup_retention_period = 7
+  deletion_protection  = false
+
+  tags = {
+    Name = "rds-postgres-free"
+    Environment = "Dev"
+  }
+}
