@@ -13,9 +13,4 @@ resource "aws_db_instance" "copa_db" {
   multi_az             = false
   backup_retention_period = 7
   deletion_protection  = false
-
-  tags = {
-    Name = "copadb"
-    Environment = "Dev"
-  }
 }
