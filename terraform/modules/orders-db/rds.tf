@@ -7,7 +7,6 @@ resource "aws_db_instance" "copa_db" {
   db_name                   = "copadb"
   username                  = "copa_admin"
   password                  = "#Urubu100"
-  parameter_group_name      = "default.postgres14"
   skip_final_snapshot       = true
   publicly_accessible       = false
   multi_az                  = false
