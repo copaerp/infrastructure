@@ -18,5 +18,4 @@ module "orders" {
 
 module "orders-db" {
   source          = "./modules/orders-db"
-  iam_role_id     = var.iam_role_id
 }
