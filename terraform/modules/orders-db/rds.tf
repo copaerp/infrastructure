@@ -4,7 +4,7 @@ resource "aws_db_instance" "copa_db" {
   engine               = "postgres"
   engine_version       = "15.4"  
   instance_class       = "db.t3.micro"
-  name                 = "copadb"
+  db_name              = "copadb"
   username             = "admin"
   password             = "#Urubu100"
   parameter_group_name = "default.copadb"
@@ -13,4 +13,9 @@ resource "aws_db_instance" "copa_db" {
   multi_az             = false
   backup_retention_period = 7
   deletion_protection  = false
+
+  tags = {
+    Name = "copadb"
+    Environment = "Dev"
+  }
 }
