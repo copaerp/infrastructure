@@ -15,3 +15,8 @@ module "orders" {
   iam_role_id     = var.iam_role_id
   route53_zone_id = module.route53.copaerp_site_zone_id
 }
+
+module "orders-db" {
+  source          = "./modules/orders-db"
+  iam_role_id     = var.iam_role_id
+}

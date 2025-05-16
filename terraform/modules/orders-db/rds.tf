@@ -15,7 +15,7 @@ resource "aws_db_instance" "copa_db" {
   deletion_protection  = false
 
   tags = {
-    Name = "rds-postgres-free"
+    Name = "copadb"
     Environment = "Dev"
   }
 }
