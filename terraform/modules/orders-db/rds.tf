@@ -5,7 +5,7 @@ resource "aws_db_instance" "copa_db" {
   engine_version          = "8.0.35"
   instance_class          = "db.t3.micro"
   username                = "copa_admin"
-  password                = var.db_password
+  password                = "#Urubu100"
   db_name                 = "copadb"
   skip_final_snapshot     = true
 
