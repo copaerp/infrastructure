@@ -3,9 +3,12 @@ resource "aws_apigatewayv2_api" "message_standardizer_api" {
   protocol_type = "HTTP"
 
   cors_configuration {
-    allow_origins = ["*"]
-    allow_methods = ["GET", "POST", "PUT", "DELETE"]
-    allow_headers = ["Content-Type", "Authorization"]
+    allow_origins     = ["*"]
+    allow_methods     = ["*"]
+    allow_headers     = ["*"]
+    allow_credentials = true
+    expose_headers    = ["*"]
+    max_age           = 3600
   }
 }
 
