@@ -1,18 +1,19 @@
-resource "aws_db_instance" "copa_db"{
+resource "aws_db_instance" "copa_db" {
   allocated_storage       = 10
   engine                  = "mysql"
-  engine_version          = "5.7"
-  instance_class          = "db.t2.micro"
+  engine_version          = "8.0.35"
+  instance_class          = "db.t3.micro"
   username                = "copa_admin"
   password                = "#Urubu100"
+  db_name                 = "copadb"
   skip_final_snapshot     = true
-  
 
-tags = {
+  tags = {
     Name        = "copadb"
     Environment = "Dev"
   }
 }
+
 
 
 # resource "aws_db_instance" "copa_db" {
