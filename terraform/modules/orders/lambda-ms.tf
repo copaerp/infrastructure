@@ -22,9 +22,15 @@ resource "aws_apigatewayv2_integration" "message_standardizer_integration" {
   integration_method = "POST"
 }
 
-resource "aws_apigatewayv2_route" "message_standardizer_route" {
+resource "aws_apigatewayv2_route" "message_standardizer_proxy_route" {
   api_id    = aws_apigatewayv2_api.message_standardizer_api.id
   route_key = "ANY /{proxy+}"
+  target    = "integrations/${aws_apigatewayv2_integration.message_standardizer_integration.id}"
+}
+
+resource "aws_apigatewayv2_route" "message_standardizer_root_route" {
+  api_id    = aws_apigatewayv2_api.message_standardizer_api.id
+  route_key = "ANY /"
   target    = "integrations/${aws_apigatewayv2_integration.message_standardizer_integration.id}"
 }
 
