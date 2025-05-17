@@ -3,7 +3,6 @@ resource "aws_db_instance" "copa_db"{
   engine                  = "mysql"
   engine_version          = "5.7"
   instance_class          = "db.t2.micro"
-  Name                    = "copa_db"
   username                = "copa_admin"
   password                = "#Urubu100"
   skip_final_snapshot     = true
