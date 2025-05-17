@@ -12,7 +12,8 @@
 			"extensions": [
 				"ms-azuretools.vscode-docker",
 				"hashicorp.terraform",
-				"github.vscode-github-actions"
+				"github.vscode-github-actions",
+				"Postman.postman-for-vscode"
 			]
 		}
 	}

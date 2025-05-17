@@ -28,12 +28,6 @@ resource "aws_apigatewayv2_route" "message_standardizer_route" {
   target    = "integrations/${aws_apigatewayv2_integration.message_standardizer_integration.id}"
 }
 
-resource "aws_apigatewayv2_route" "message_standardizer_root_route" {
-  api_id    = aws_apigatewayv2_api.message_standardizer_api.id
-  route_key = "ANY /"
-  target    = "integrations/${aws_apigatewayv2_integration.message_standardizer_integration.id}"
-}
-
 resource "aws_lambda_permission" "message_standardizer_permission" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.message_standardizer.function_name
