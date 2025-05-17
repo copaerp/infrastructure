@@ -5,6 +5,10 @@ locals {
   dummy_source_file    = "${path.root}/dummy_bootstrap.zip"
 }
 
+data "aws_iam_role" "existing_role" {
+  name = var.iam_role_id
+}
+
 resource "aws_lambda_function" "channel_dispatcher" {
   function_name = "channel-dispatcher"
 
