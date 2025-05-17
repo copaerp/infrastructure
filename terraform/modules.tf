@@ -17,5 +17,5 @@ module "orders" {
 }
 
 module "orders-db" {
-  source          = "./modules/orders-db"
+  source = "./modules/orders-db"
 }
