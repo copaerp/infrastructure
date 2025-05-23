@@ -8,10 +8,12 @@ resource "aws_db_instance" "copa_db" {
   password                = "#Urubu100"
   db_name                 = "copadb"
   skip_final_snapshot     = true
-  publicly_accessible     = true
+  publicly_accessible     = false
 
   tags = {
     Name        = "copadb"
     Environment = "Dev"
   }
 }
+
+
