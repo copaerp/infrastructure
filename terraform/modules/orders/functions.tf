@@ -4,6 +4,7 @@ locals {
   lambda_architectures = ["arm64"]
   dummy_source_file    = "${path.root}/dummy_bootstrap.zip"
   envs = {
+    whatsapp_api_url         = "https://graph.facebook.com/v22.0/622466564276838/messages"
     n8n_webhook_url          = "https://n8n.copaerp.site/webhook/"
     new_message_workflow_id  = "aba98742-debe-4f62-a283-55519635318b"
     environment              = "prod"
