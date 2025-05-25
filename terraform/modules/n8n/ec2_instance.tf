@@ -1,5 +1,6 @@
 resource "aws_security_group" "n8n_sg" {
-  name = "n8n_sg"
+  name   = "n8n_sg"
+  vpc_id = var.vpc_id
 
   ingress {
     from_port   = 22
@@ -48,7 +49,8 @@ resource "aws_instance" "n8n" {
   instance_type        = "t2.micro"
   iam_instance_profile = aws_iam_instance_profile.n8n_instance_profile.name
 
-  security_groups = [aws_security_group.n8n_sg.name]
+  vpc_security_group_ids = [aws_security_group.n8n_sg.id]
+  subnet_id              = var.private_subnet_a_id
 
   root_block_device {
     volume_size = 20

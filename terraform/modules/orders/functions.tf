@@ -4,9 +4,29 @@ locals {
   lambda_architectures = ["arm64"]
   dummy_source_file    = "${path.root}/dummy_bootstrap.zip"
   envs = {
-    n8n_webhook_url       = "https://n8n.copaerp.site/webhook/aba98742-debe-4f62-a283-55519635318b"
-    environment           = "prod"
-    whatsapp_verify_token = "your_verify_token"
+    n8n_webhook_url         = "https://n8n.copaerp.site/webhook/"
+    new_message_workflow_id = "aba98742-debe-4f62-a283-55519635318b"
+    environment             = "prod"
+    whatsapp_verify_token   = "your_verify_token"
+  }
+}
+
+resource "aws_security_group" "lambda_sg" {
+  name   = "lambda-sg"
+  vpc_id = var.vpc_id
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = []
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -23,6 +43,11 @@ resource "aws_lambda_function" "channel_dispatcher" {
   filename = local.dummy_source_file
 
   architectures = local.lambda_architectures
+
+  vpc_config {
+    subnet_ids         = [var.private_subnet_a_id]
+    security_group_ids = [aws_security_group.lambda_sg.id]
+  }
 
   environment {
     variables = local.envs
@@ -42,6 +67,11 @@ resource "aws_lambda_function" "message_standardizer" {
 
   architectures = local.lambda_architectures
 
+  vpc_config {
+    subnet_ids         = [var.private_subnet_a_id]
+    security_group_ids = [aws_security_group.lambda_sg.id]
+  }
+
   environment {
     variables = local.envs
   }
@@ -59,6 +89,11 @@ resource "aws_lambda_function" "frontend_bridge" {
   filename = local.dummy_source_file
 
   architectures = local.lambda_architectures
+
+  vpc_config {
+    subnet_ids         = [var.private_subnet_a_id]
+    security_group_ids = [aws_security_group.lambda_sg.id]
+  }
 
   environment {
     variables = local.envs

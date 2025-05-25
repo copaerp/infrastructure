@@ -1,15 +1,8 @@
-data "aws_vpc" "default" {
-  default = true
-}
-
-
-resource "aws_security_group" "rds_sg" {
-  name        = "rds-sg"
-  description = "Security group do RDS"
-  vpc_id      = data.aws_vpc.default.id
+resource "aws_security_group" "orders_db_sg" {
+  name   = "orders-db-sg"
+  vpc_id = var.vpc_id
 
   ingress {
-    description = "Security group do RDS"
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
@@ -24,6 +17,6 @@ resource "aws_security_group" "rds_sg" {
   }
 
   tags = {
-    Name = "rds-sg"
+    Name = "orders-db-sg"
   }
 }
