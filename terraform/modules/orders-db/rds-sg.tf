@@ -2,7 +2,6 @@ data "aws_vpc" "default" {
   default = true
 }
 
-
 resource "aws_security_group" "rds_sg" {
   name        = "rds-sg"
   description = "Security group do RDS"
