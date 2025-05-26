@@ -23,6 +23,5 @@ module "orders" {
 
 module "s3_bronze" {
   source      = "./modules/s3_bucket"
-  bucket_name = "copaerp-s3-bronze"
   # environment = var.environment
 }
