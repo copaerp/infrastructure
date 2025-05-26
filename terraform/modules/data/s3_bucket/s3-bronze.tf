@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "bronze" {
-  bucket = "copas3-bronze" #${var.environment}
+  bucket = "copa-general-bronze" #${var.environment}
   tags = {
-    Name        = "s3-bronze"
+    Name        = "copa-general-bronze"
     # Environment = var.environment
   }
 }
