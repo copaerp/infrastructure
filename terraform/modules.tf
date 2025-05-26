@@ -25,3 +25,10 @@ module "s3_bronze" {
   source      = "./modules/data/s3_bucket"
   # environment = var.environment
 }
+
+module "kinesis_firehose" {
+  source            = "./modules/data/kinesis"
+  name              = "firehose-copa"
+  firehose_role_arn = module.kinesis_iam_role.role_arn
+  bucket_arn        = "arn:aws:s3:::copa-general-s3"
+}
