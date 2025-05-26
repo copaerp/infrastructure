@@ -14,12 +14,12 @@ variable "iam_role_id" {
   default = "LabRole"
 }
 
-variable "bucket_name" {
-  description = "Bucket s3-bronze"
-  type        = string
-}
+# variable "bucket_name" {
+#   description = "Bucket s3-bronze"
+#   type        = string
+# }
 
-variable "environment" {
-  description = "Ambiente de deployment"
-  type        = string
-}
+# variable "environment" {
+#   description = "Ambiente de deployment"
+#   type        = string
+# }

@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "bronze" {
-  bucket = "copas3-bronze-${var.environment}"  #coloquei no variables o ambiente como dev, podemos automatizar isso depois
+  bucket = "copas3-bronze" #${var.environment}
   tags = {
     Name        = "s3-bronze"
-    Environment = var.environment
+    # Environment = var.environment
   }
 }
 
