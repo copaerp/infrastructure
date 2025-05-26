@@ -22,6 +22,6 @@ module "orders" {
 }
 
 module "s3_bronze" {
-  source      = "./modules/s3_bucket"
+  source      = "./modules/data/s3_bucket"
   # environment = var.environment
 }
