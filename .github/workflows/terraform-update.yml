@@ -1,7 +1,7 @@
 name: Run Terraform
 
 on:
-  push:
+  workflow dispatch:
     branches:
       - main
     paths:

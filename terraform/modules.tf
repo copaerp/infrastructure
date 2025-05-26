@@ -21,7 +21,7 @@ module "orders" {
   orders_db_connection_url = module.orders-db.orders_db_connection_url
 }
 
-module "s3_bronze" {
-  source      = "./modules/s3_bucket"
-  # environment = var.environment
-}
+# module "s3_bronze" {
+#   source      = "./modules/s3_bucket"
+#   # environment = var.environment
+# }
