@@ -24,4 +24,5 @@ module "orders" {
 module "s3_bronze" {
   source      = "./modules/s3_bucket"
   bucket_name = var.s3_bronze_bucket_name
+  environment = var.environment
 }
