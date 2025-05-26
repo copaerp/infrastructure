@@ -13,3 +13,9 @@ variable "ami_id" {
 variable "iam_role_id" {
   default = "LabRole"
 }
+
+variable "environment" {
+  description = "Ambiente de implantação"
+  type        = string
+  default     = "dev"
+}
