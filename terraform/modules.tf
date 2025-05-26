@@ -20,3 +20,8 @@ module "orders" {
   route53_zone_id          = module.route53.copaerp_site_zone_id
   orders_db_connection_url = module.orders-db.orders_db_connection_url
 }
+
+module "s3_bronze" {
+  source      = "./modules/s3_bucket"
+  bucket_name = var.s3_bronze_bucket_name
+}
