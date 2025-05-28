@@ -22,6 +22,10 @@ locals {
   iam_role_arn = "arn:aws:iam::${var.account_id}:role/${var.iam_role_id}"
 }
 
+data "aws_iam_role" "existing_role" {
+  name = var.iam_role_id
+}
+
 # variable "bucket_name" {
 #   description = "Bucket s3-bronze"
 #   type        = string
