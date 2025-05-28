@@ -30,5 +30,5 @@ module "kinesis_firehose" {
   source       = "./modules/data/kinesis"
   name         = "firehose-copa"
   iam_role_id  = data.aws_iam_role.existing_role.arn        
-  bucket_arn   = "arn:aws:s3:::copa-general-s3"
+  bucket_arn   = "arn:aws:s3:::copa-general-bronze"
 }
