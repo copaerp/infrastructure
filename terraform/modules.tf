@@ -29,6 +29,6 @@ module "s3_bronze" {
 module "kinesis_firehose" {
   source       = "./modules/data/kinesis"
   name         = "firehose-copa"
-  iam_role_id  = var.iam_role_id           
+  iam_role_id  = local.iam_role_id           
   bucket_arn   = "arn:aws:s3:::copa-general-s3"
 }
