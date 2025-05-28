@@ -10,8 +10,16 @@ variable "ami_id" {
   default = "ami-08b5b3a93ed654d19" // Amazon Linux 2023 AMI
 }
 
+variable "account_id" {
+  default = "390251560541"
+}
+
 variable "iam_role_id" {
   default = "LabRole"
+}
+
+locals {
+  iam_role_arn = "arn:aws:iam::${var.account_id}:role/${var.role_name}"
 }
 
 # variable "bucket_name" {
