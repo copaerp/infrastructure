@@ -3,7 +3,7 @@ resource "aws_kinesis_firehose_delivery_stream" "this" {
   destination = "extended_s3"
 
   extended_s3_configuration {
-    role_arn           = var.firehose_role_arn
+    role_arn           = var.iam_role_id
     bucket_arn         = var.bucket_arn
     buffering_size     = var.buffering_size
     buffering_interval = var.buffering_interval

@@ -3,6 +3,11 @@ variable "name" {
   type        = string
 }
 
+variable "iam_role_id" {
+  description = "IAM role ARN for Firehose"
+  type        = string
+}
+
 variable "firehose_role_arn" {
   description = "ARN da IAM Role do Firehose"
   type        = string
