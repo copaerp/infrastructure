@@ -8,10 +8,10 @@ variable "iam_role_id" {
   type        = string
 }
 
-variable "firehose_role_arn" {
-  description = "ARN da IAM Role do Firehose"
-  type        = string
-}
+# variable "firehose_role_arn" {
+#   description = "ARN da IAM Role do Firehose"
+#   type        = string
+# }
 
 variable "bucket_arn" {
   description = "ARN do bucket S3 para destino"
