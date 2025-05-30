@@ -12,6 +12,8 @@ resource "aws_db_instance" "orders_db" {
   skip_final_snapshot = true
   publicly_accessible = true
 
+  iam_database_authentication_enabled = true
+
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 
   tags = {
