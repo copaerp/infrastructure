@@ -18,10 +18,10 @@ module "orders" {
   source                   = "./modules/orders"
   route53_zone_id          = module.route53.copaerp_site_zone_id
   orders_db_connection_url = module.orders-db.orders_db_connection_url
-  iam_role_id              = var.iam_role_id
+  iam_role_id              = data.aws_iam_role.existing_role.arn
 }
 
 module "data" {
   source      = "./modules/data"
-  iam_role_id = var.iam_role_id
+  iam_role_id = data.aws_iam_role.existing_role.arn
 }

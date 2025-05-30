@@ -21,6 +21,3 @@ variable "iam_role_name" {
 data "aws_iam_role" "existing_role" {
   name = var.iam_role_name
 }
-variable "iam_role_id" {
-  default = data.aws_iam_role.existing_role.arn
-}
