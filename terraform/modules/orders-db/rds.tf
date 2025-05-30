@@ -20,6 +20,15 @@ resource "aws_db_instance" "orders_db" {
   }
 }
 
-output "orders_db_connection_url" {
-  value = "mysql://${aws_db_instance.orders_db.username}:${aws_db_instance.orders_db.password}@${aws_db_instance.orders_db.endpoint}/${aws_db_instance.orders_db.db_name}"
+output "orders_db_username" {
+  value = aws_db_instance.orders_db.username
+}
+output "orders_db_password" {
+  value = aws_db_instance.orders_db.password
+}
+output "orders_db_endpoint" {
+  value = aws_db_instance.orders_db.endpoint
+}
+output "orders_db_name" {
+  value = aws_db_instance.orders_db.db_name
 }

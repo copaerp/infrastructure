@@ -15,10 +15,13 @@ module "orders-db" {
 }
 
 module "orders" {
-  source                   = "./modules/orders"
-  route53_zone_id          = module.route53.copaerp_site_zone_id
-  orders_db_connection_url = module.orders-db.orders_db_connection_url
-  iam_role_id              = data.aws_iam_role.existing_role.arn
+  source             = "./modules/orders"
+  route53_zone_id    = module.route53.copaerp_site_zone_id
+  orders_db_username = module.orders-db.orders_db_username
+  orders_db_password = module.orders-db.orders_db_password
+  orders_db_endpoint = module.orders-db.orders_db_endpoint
+  orders_db_name     = module.orders-db.orders_db_name
+  iam_role_id        = data.aws_iam_role.existing_role.arn
 }
 
 module "data" {
