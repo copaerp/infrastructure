@@ -68,7 +68,6 @@ CREATE TABLE `order` (
     id CHAR(36) AUTO_INCREMENT PRIMARY KEY,
     customer_id CHAR(36),
     unit_id CHAR(36),
-    whatsapp_number_id CHAR(36),
     channel_id CHAR(36),
     status VARCHAR(50),
     notes TEXT,
@@ -79,7 +78,6 @@ CREATE TABLE `order` (
     canceled_at DATETIME,
     FOREIGN KEY (customer_id) REFERENCES customer(id),
     FOREIGN KEY (unit_id) REFERENCES unit(id),
-    FOREIGN KEY (whatsapp_number_id) REFERENCES whatsapp_number(id),
     FOREIGN KEY (channel_id) REFERENCES channel(id)
 );
 
@@ -106,10 +104,10 @@ CREATE TABLE product_order (
 
 CREATE TABLE whatsapp_number (
     id CHAR(36) AUTO_INCREMENT PRIMARY KEY,
-    business_id CHAR(36),
+    unit_id CHAR(36),
     number VARCHAR(20),
     description VARCHAR(255),
     created_at DATETIME,
     updated_at DATETIME,
-    FOREIGN KEY (business_id) REFERENCES business(id)
+    FOREIGN KEY (unit_id) REFERENCES unit(id)
 )
