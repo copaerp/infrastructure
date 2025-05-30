@@ -1,5 +1,5 @@
 resource "aws_iam_role" "this" {
-  name = var.role_name
+  name = "kinesis-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -10,15 +10,15 @@ resource "aws_iam_role" "this" {
           Service = "firehose.amazonaws.com"
         },
         Effect = "Allow",
-        Sid = ""
+        Sid    = ""
       }
     ]
   })
 }
 
 resource "aws_iam_role_policy" "this" {
-  name   = "${var.role_name}-policy"
-  role   = aws_iam_role.this.id
+  role = aws_iam_role.this.id
+
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -30,8 +30,8 @@ resource "aws_iam_role_policy" "this" {
           "s3:ListBucket"
         ],
         Resource = [
-          var.bucket_arn,
-          "${var.bucket_arn}/*"
+          aws_s3_bucket.general_bronze.arn,
+          "${aws_s3_bucket.general_bronze.arn}/*"
         ]
       }
     ]

@@ -14,24 +14,13 @@ variable "account_id" {
   default = "390251560541"
 }
 
-variable "iam_role_id" {
+// IAM Default Role
+variable "iam_role_name" {
   default = "LabRole"
 }
-
-locals {
-  iam_role_arn = "arn:aws:iam::${var.account_id}:role/${var.iam_role_id}"
-}
-
 data "aws_iam_role" "existing_role" {
-  name = var.iam_role_id
+  name = var.iam_role_name
 }
-
-# variable "bucket_name" {
-#   description = "Bucket s3-bronze"
-#   type        = string
-# }
-
-# variable "environment" {
-#   description = "Ambiente de deployment"
-#   type        = string
-# }
+variable "iam_role_id" {
+  default = data.aws_iam_role.existing_role.arn
+}

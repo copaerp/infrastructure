@@ -39,7 +39,7 @@ resource "aws_security_group" "n8n_sg" {
 
 resource "aws_iam_instance_profile" "n8n_instance_profile" {
   name = "n8n-instance-profile"
-  role = var.iam_role_id
+  role = var.iam_role_name
 }
 
 resource "aws_instance" "n8n" {
