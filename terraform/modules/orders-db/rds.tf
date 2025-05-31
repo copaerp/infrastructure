@@ -10,8 +10,7 @@ resource "aws_db_instance" "orders_db" {
   password = "#Urubu100"
 
   skip_final_snapshot = true
-
-  iam_database_authentication_enabled = true
+  publicly_accessible = true
 
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 
