@@ -10,7 +10,6 @@ resource "aws_db_instance" "orders_db" {
   password = "#Urubu100"
 
   skip_final_snapshot = true
-  publicly_accessible = true
 
   iam_database_authentication_enabled = true
 

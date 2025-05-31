@@ -15,6 +15,24 @@ locals {
     orders_db_name          = var.orders_db_name
   }
 }
+data "aws_vpc" "default" {
+  default = true
+}
+data "aws_subnet_ids" "default" {
+  vpc_id = data.aws_vpc.default.id
+}
+
+resource "aws_security_group" "lambda_sg" {
+  name   = "lambda-sg"
+  vpc_id = data.aws_vpc.default.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 
 resource "aws_lambda_function" "channel_dispatcher" {
   function_name = "channel-dispatcher"
@@ -28,6 +46,11 @@ resource "aws_lambda_function" "channel_dispatcher" {
 
   environment {
     variables = local.envs
+  }
+
+  vpc_config {
+    subnet_ids         = data.aws_subnet_ids.default.ids
+    security_group_ids = [aws_security_group.lambda_sg.id]
   }
 
   timeout     = 30
@@ -48,6 +71,11 @@ resource "aws_lambda_function" "message_standardizer" {
     variables = local.envs
   }
 
+  vpc_config {
+    subnet_ids         = data.aws_subnet_ids.default.ids
+    security_group_ids = [aws_security_group.lambda_sg.id]
+  }
+
   timeout     = 30
   memory_size = 128
 }
@@ -64,6 +92,11 @@ resource "aws_lambda_function" "frontend_bridge" {
 
   environment {
     variables = local.envs
+  }
+
+  vpc_config {
+    subnet_ids         = data.aws_subnet_ids.default.ids
+    security_group_ids = [aws_security_group.lambda_sg.id]
   }
 
   timeout     = 30
