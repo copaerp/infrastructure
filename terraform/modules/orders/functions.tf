@@ -18,8 +18,12 @@ locals {
 data "aws_vpc" "default" {
   default = true
 }
-data "aws_subnet_ids" "default" {
-  vpc_id = data.aws_vpc.default.id
+
+data "aws_subnets" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
 }
 
 resource "aws_security_group" "lambda_sg" {
@@ -49,7 +53,7 @@ resource "aws_lambda_function" "channel_dispatcher" {
   }
 
   vpc_config {
-    subnet_ids         = data.aws_subnet_ids.default.ids
+    subnet_ids         = data.aws_subnets.default.ids
     security_group_ids = [aws_security_group.lambda_sg.id]
   }
 
@@ -72,7 +76,7 @@ resource "aws_lambda_function" "message_standardizer" {
   }
 
   vpc_config {
-    subnet_ids         = data.aws_subnet_ids.default.ids
+    subnet_ids         = data.aws_subnets.default.ids
     security_group_ids = [aws_security_group.lambda_sg.id]
   }
 
@@ -95,7 +99,7 @@ resource "aws_lambda_function" "frontend_bridge" {
   }
 
   vpc_config {
-    subnet_ids         = data.aws_subnet_ids.default.ids
+    subnet_ids         = data.aws_subnets.default.ids
     security_group_ids = [aws_security_group.lambda_sg.id]
   }
 
