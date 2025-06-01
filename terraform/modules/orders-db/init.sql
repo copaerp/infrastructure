@@ -74,6 +74,7 @@ CREATE TABLE `order` (
     status VARCHAR(50),
     notes TEXT,
     payment_method VARCHAR(100),
+    last_message_at TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     finished_at TIMESTAMP NULL,
