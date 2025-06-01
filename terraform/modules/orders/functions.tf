@@ -13,12 +13,14 @@ locals {
     orders_db_password      = var.orders_db_password
     orders_db_endpoint      = var.orders_db_endpoint
     orders_db_name          = var.orders_db_name
-    cd_arn                  = aws_lambda_function.channel_dispatcher.arn
-    ms_arn                  = aws_lambda_function.message_standardizer.arn
-    fb_arn                  = aws_lambda_function.frontend_bridge.arn
-    ot_arn                  = aws_lambda_function.orders_timeout.arn
     role_arn                = var.iam_role_id
   }
+
+  ot_envs = {
+    ot_arn = aws_lambda_function.orders_timeout.arn
+  }
+
+  ot_envs_group = merge(local.envs, local.ot_envs)
 }
 
 resource "aws_lambda_function" "channel_dispatcher" {
@@ -32,7 +34,7 @@ resource "aws_lambda_function" "channel_dispatcher" {
   architectures = local.lambda_architectures
 
   environment {
-    variables = local.envs
+    variables = local.ot_envs_group
   }
 
   timeout     = 30
@@ -50,7 +52,7 @@ resource "aws_lambda_function" "message_standardizer" {
   architectures = local.lambda_architectures
 
   environment {
-    variables = local.envs
+    variables = local.ot_envs_group
   }
 
   timeout     = 30
@@ -68,7 +70,7 @@ resource "aws_lambda_function" "frontend_bridge" {
   architectures = local.lambda_architectures
 
   environment {
-    variables = local.envs
+    variables = local.ot_envs_group
   }
 
   timeout     = 30
