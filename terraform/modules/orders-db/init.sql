@@ -110,6 +110,7 @@ CREATE TABLE whatsapp_number (
     unit_id CHAR(36),
     number VARCHAR(20),
     description VARCHAR(255),
+    meta_number_id CHAR(15),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (unit_id) REFERENCES unit(id)
@@ -136,8 +137,8 @@ INSERT product_in_unit (id, product_id, unit_id) VALUES
 ('69bbfc19-10e4-45f0-bef1-e6df47a9324f', '3f279d5d-5f64-43da-9ef7-538444d31a93', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
 ('f6beccdb-8bda-4ff7-9554-6d247cfc29a8', 'b6f4b6a2-5738-4f64-9054-bcdb9611326c', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5');
 
-INSERT whatsapp_number (id, unit_id, number, description) VALUES
-('dac4da05-05dd-4716-96d7-a29dd7ca81a9', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5', '15556382629', 'WhatsApp Principal');
+INSERT whatsapp_number (id, unit_id, number, description, meta_number_id) VALUES
+('dac4da05-05dd-4716-96d7-a29dd7ca81a9', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5', '15556382629', 'WhatsApp Principal', '622466564276838');
 
 INSERT customer (id, business_id, full_name, phone, email, document, birth_date) VALUES
-('6186b034-cb04-4f3b-a029-1ac716af6a84', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Joaquim Pires', '15556382629', 'joaqu1m.pires@hotmail.com', '12345678901', '1990-01-01');
+('6186b034-cb04-4f3b-a029-1ac716af6a84', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Joaquim Pires', '5517997355173', 'joaqu1m.pires@hotmail.com', '12345678901', '1990-01-01');
