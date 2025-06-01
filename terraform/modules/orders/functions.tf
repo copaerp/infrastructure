@@ -17,6 +17,7 @@ locals {
     ms_arn                  = aws_lambda_function.message_standardizer.arn
     fb_arn                  = aws_lambda_function.frontend_bridge.arn
     ot_arn                  = aws_lambda_function.orders_timeout.arn
+    role_arn                = var.iam_role_id
   }
 }
 
