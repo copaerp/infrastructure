@@ -20,6 +20,7 @@ CREATE TABLE customer (
     business_id CHAR(36),
     full_name VARCHAR(255),
     phone VARCHAR(20),
+    instagram_user VARCHAR(255),
     email VARCHAR(255),
     document VARCHAR(50),
     birth_date DATE,
@@ -121,7 +122,8 @@ INSERT channel (id, name) VALUES
 ('83f3f976-8be2-4e27-8406-baae013f1668', 'Instagram'),
 ('1394b549-7976-4f85-b26d-09fd2a7618d4', 'Facebook'),
 ('8b848fb0-2b67-405c-998e-51df7324b665', 'iFood'),
-('a05ab3bb-b30e-469b-9445-a5bf7322cad9', 'Phone');
+('a05ab3bb-b30e-469b-9445-a5bf7322cad9', 'Phone'),
+('c7f14cd1-7e26-47b5-ae54-4808ddd673ac', 'Site');
 
 INSERT business (id, name, legal_name, cnpj, email, phone, logo_url, industry) VALUES
 ('593db8e0-c46c-4e6e-9699-9e12f259e840', 'Pará Lanches', 'Para Lanches', '51.513.888/0001-05', 'paralanches@gmail.com', '15556382629', '', 'Food');
@@ -140,5 +142,5 @@ INSERT product_in_unit (id, product_id, unit_id) VALUES
 INSERT whatsapp_number (id, unit_id, number, description, meta_number_id) VALUES
 ('dac4da05-05dd-4716-96d7-a29dd7ca81a9', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5', '15556382629', 'WhatsApp Principal', '622466564276838');
 
-INSERT customer (id, business_id, full_name, phone, email, document, birth_date) VALUES
-('6186b034-cb04-4f3b-a029-1ac716af6a84', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Joaquim Pires', '5517997355173', 'joaqu1m.pires@hotmail.com', '12345678901', '1990-01-01');
+INSERT customer (id, business_id, full_name, phone, instagram_user, email, document, birth_date) VALUES
+('6186b034-cb04-4f3b-a029-1ac716af6a84', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Joaquim Pires', '5517997355173', 'jocasrc', 'joaqu1m.pires@hotmail.com', '12345678901', '1990-01-01');
