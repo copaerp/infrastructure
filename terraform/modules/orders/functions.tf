@@ -13,6 +13,10 @@ locals {
     orders_db_password      = var.orders_db_password
     orders_db_endpoint      = var.orders_db_endpoint
     orders_db_name          = var.orders_db_name
+    cd_arn                  = aws_lambda_function.channel_dispatcher.arn
+    ms_arn                  = aws_lambda_function.message_standardizer.arn
+    fb_arn                  = aws_lambda_function.frontend_bridge.arn
+    ot_arn                  = aws_lambda_function.orders_timeout.arn
   }
 }
 
