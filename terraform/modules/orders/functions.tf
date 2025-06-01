@@ -69,3 +69,26 @@ resource "aws_lambda_function" "frontend_bridge" {
   timeout     = 30
   memory_size = 128
 }
+
+resource "aws_lambda_function" "orders_timeout" {
+  function_name = "orders-timeout"
+
+  role     = var.iam_role_id
+  handler  = local.lambda_handler
+  runtime  = local.lambda_runtime
+  filename = local.dummy_source_file
+
+  architectures = local.lambda_architectures
+
+  environment {
+    variables = local.envs
+  }
+
+  vpc_config {
+    subnet_ids         = data.aws_subnets.public.ids
+    security_group_ids = [aws_security_group.allow_all.id]
+  }
+
+  timeout     = 30
+  memory_size = 128
+}
