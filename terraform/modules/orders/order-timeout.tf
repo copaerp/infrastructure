@@ -12,7 +12,7 @@ data "aws_subnets" "public" {
 resource "aws_security_group" "allow_all" {
   name        = "lambda_allow_all"
   description = "Allow all egress"
-  vpc_id      = aws_vpc.default.id
+  vpc_id      = data.aws_vpc.default.id
 
   egress {
     from_port   = 0
