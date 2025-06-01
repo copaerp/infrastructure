@@ -7,8 +7,7 @@ on:
       - main
     paths:
       - 'terraform/**'
-    paths-ignore:
-      - '**/*.sql'
+      - '!terraform/**/*.sql'
 
 jobs:
   terraform:
