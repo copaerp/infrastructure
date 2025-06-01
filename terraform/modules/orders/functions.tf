@@ -6,7 +6,7 @@ locals {
   envs = {
     whatsapp_api_url        = "https://graph.facebook.com/v22.0/622466564276838/messages"
     n8n_webhook_url         = "https://n8n.copaerp.site/webhook/"
-    new_message_workflow_id = "aba98742-debe-4f62-a283-55519635318b"
+    new_message_workflow_id = "998ea582-5067-4362-b677-96c6f9991a7f"
     environment             = "prod"
     whatsapp_verify_token   = "your_verify_token"
     orders_db_username      = var.orders_db_username
