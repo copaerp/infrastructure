@@ -143,4 +143,5 @@ INSERT whatsapp_number (id, unit_id, number, description, meta_number_id) VALUES
 ('dac4da05-05dd-4716-96d7-a29dd7ca81a9', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5', '15556382629', 'WhatsApp Principal', '622466564276838');
 
 INSERT customer (id, business_id, full_name, phone, instagram_user, email, document, birth_date) VALUES
-('6186b034-cb04-4f3b-a029-1ac716af6a84', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Joaquim Pires', '5517997355173', 'jocasrc', 'joaqu1m.pires@hotmail.com', '12345678901', '1990-01-01');
+('6186b034-cb04-4f3b-a029-1ac716af6a84', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Joaquim Pires', '5517997355173', 'jocasrc', 'joaqu1m.pires@hotmail.com', '65463821054', '1990-01-01'),
+('a029c004-7369-40c4-86c1-b9dbe7cee514', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Erick Pio', '5511963107396', 'sloninsk', 'erick.pio@sptech.school', '60625937015', '1990-01-01');
