@@ -10,4 +10,10 @@ terraform {
     dynamodb_table = "copaerp-terraform-lock"
     encrypt        = true
   }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 5.30.0"
+    }
+  }
 }
