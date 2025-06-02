@@ -30,3 +30,10 @@ resource "aws_scheduler_connection" "order_connection" {
   name               = "order-external-api-connection"
   authorization_type = "NONE"
 }
+
+resource "aws_eventbridge_api_destination" "order_api_destination" {
+  name                = "order-api-destination"
+  connection_arn      = aws_eventbridge_connection.order_api_connection.arn
+  invocation_endpoint = "https://n8n.copaerp.site/webhook/998ea582-5067-4362-b677-96c6f9991a7f"
+  http_method         = "POST"
+}
