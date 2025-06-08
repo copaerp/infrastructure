@@ -148,7 +148,17 @@ INSERT product (id, business_id, name, description, brl_price, category, image_u
 
 INSERT product_in_unit (id, product_id, unit_id) VALUES
 ('69bbfc19-10e4-45f0-bef1-e6df47a9324f', '3f279d5d-5f64-43da-9ef7-538444d31a93', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
-('f6beccdb-8bda-4ff7-9554-6d247cfc29a8', 'b6f4b6a2-5738-4f64-9054-bcdb9611326c', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5');
+('f6beccdb-8bda-4ff7-9554-6d247cfc29a8', 'b6f4b6a2-5738-4f64-9054-bcdb9611326c', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
+('b15ac5fc-269f-4f5a-b1a1-8889e299f1cf', '86bc8208-f84e-45fd-9eb1-0668b9f6a2c5', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
+('7db04417-9b85-49d7-bee5-94f93c108887', '3e95e6e1-db35-4e01-9472-f7092a43a0e9', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
+('01be7b2d-fd7f-48b9-b2ed-8a709cfb9b04', 'ebae84d7-5051-4e8c-afc8-e2d2d5dea0ea', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
+('0c3caa4a-4bdc-4130-8b16-0edb0ce371eb', '3c21b014-5ce0-4bbe-9431-2e5e5e17f7af', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
+('5911da39-adc2-4b9f-b3f2-9de8d1dc2eb7', 'c32f0f6d-2ddc-41f2-a605-c1bdc648ed0f', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
+('e7f60143-4db5-4cc3-89e7-e0204deeecea', '4eb15b99-05b6-4e3f-8109-14683b282692', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
+('0bc6e8ff-a228-4a83-9d77-075861594d37', '1f363c55-34db-4dca-b586-fcbd5d7f8804', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
+('90edb56f-cd58-4496-9154-b07583fc3424', 'a1ef019b-a724-45c3-a1ca-40e32f57a60a', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
+('08bf02f9-fdf8-40e8-96b6-1476fc48535d', '10d7adc1-2b24-40c3-a599-a7241a7e786e', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
+('cde61d9e-5b5e-4a65-ae12-9e2af6eacabb', '2185006f-8489-4197-a640-dc0f6b0cc3b6', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5');
 
 INSERT whatsapp_number (id, unit_id, number, description, meta_number_id) VALUES
 ('dac4da05-05dd-4716-96d7-a29dd7ca81a9', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5', '15556382629', 'WhatsApp Principal', '622466564276838');
