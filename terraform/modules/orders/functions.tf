@@ -15,7 +15,6 @@ locals {
     orders_db_endpoint        = var.orders_db_endpoint
     orders_db_name            = var.orders_db_name
     role_arn                  = var.iam_role_id
-    api_destination_arn       = aws_eventbridge_api_destination.order_api_destination.arn
   }
 
   ot_envs = {
