@@ -134,7 +134,17 @@ INSERT unit (id, business_id, name, phone, postal_code, street_name, street_numb
 
 INSERT product (id, business_id, name, description, brl_price, category, image_url) VALUES
 ('3f279d5d-5f64-43da-9ef7-538444d31a93', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'X-Burguer', 'Delicioso X-Burguer com queijo e bacon', 19.90, 'Lanches', ''),
-('b6f4b6a2-5738-4f64-9054-bcdb9611326c', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Batata Frita', 'Porção de batata frita crocante', 9.90, 'Acompanhamentos', '');
+('b6f4b6a2-5738-4f64-9054-bcdb9611326c', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Batata Rústica', 'Batatas cortadas com casca e levemente temperadas', 9.90, 'Acompanhamentos', ''),
+('86bc8208-f84e-45fd-9eb1-0668b9f6a2c5', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Anéis de Cebola', 'Anéis de cebola empanados e crocantes', 9.90, 'Acompanhamentos', ''),
+('3e95e6e1-db35-4e01-9472-f7092a43a0e9', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Mandioca Frita', 'Porção de mandioca frita crocante por fora e macia por dentro', 9.90, 'Acompanhamentos', ''),
+('ebae84d7-5051-4e8c-afc8-e2d2d5dea0ea', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Chips de Batata Doce', 'Batata doce crocante, uma opção mais saudável', 9.90, 'Acompanhamentos', ''),
+('3c21b014-5ce0-4bbe-9431-2e5e5e17f7af', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Mini Coxinhas', 'Porção com mini coxinhas crocantes de frango', 9.90, 'Acompanhamentos', ''),
+('c32f0f6d-2ddc-41f2-a605-c1bdc648ed0f', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Bolinho de Queijo', 'Bolinho frito recheado com queijo derretido', 9.90, 'Acompanhamentos', ''),
+('4eb15b99-05b6-4e3f-8109-14683b282692', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Nuggets de Frango', 'Croquetes de frango empanado', 9.90, 'Acompanhamentos', ''),
+('1f363c55-34db-4dca-b586-fcbd5d7f8804', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Batata Smile', 'Batatinhas em formato de smiley, ótima para crianças', 9.90, 'Acompanhamentos', ''),
+('a1ef019b-a724-45c3-a1ca-40e32f57a60a', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Batata Recheada', 'Batata com recheio de cheddar e bacon', 9.90, 'Acompanhamentos', ''),
+('10d7adc1-2b24-40c3-a599-a7241a7e786e', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Polenta Frita', 'Tirinhas de polenta crocantes', 9.90, 'Acompanhamentos', ''),
+('2185006f-8489-4197-a640-dc0f6b0cc3b6', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Batata Espiral', 'Batata em espiral no palito, temperada e frita', 9.90, 'Acompanhamentos', '');
 
 INSERT product_in_unit (id, product_id, unit_id) VALUES
 ('69bbfc19-10e4-45f0-bef1-e6df47a9324f', '3f279d5d-5f64-43da-9ef7-538444d31a93', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5'),
