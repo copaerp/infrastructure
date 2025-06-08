@@ -92,11 +92,6 @@ resource "aws_lambda_function" "orders_timeout" {
     variables = local.envs
   }
 
-  vpc_config {
-    subnet_ids         = data.aws_subnets.public.ids
-    security_group_ids = [aws_security_group.allow_all.id]
-  }
-
   timeout     = 30
   memory_size = 128
 }
