@@ -24,6 +24,10 @@ locals {
   ot_envs_group = merge(local.envs, local.ot_envs)
 }
 
+data "aws_vpc" "default" {
+  default = true
+}
+
 resource "aws_security_group" "allow_all" {
   name        = "lambda_allow_all"
   description = "Allow all egress"
