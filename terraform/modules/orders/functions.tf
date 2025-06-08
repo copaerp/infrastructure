@@ -24,6 +24,19 @@ locals {
   ot_envs_group = merge(local.envs, local.ot_envs)
 }
 
+resource "aws_security_group" "allow_all" {
+  name        = "lambda_allow_all"
+  description = "Allow all egress"
+  vpc_id      = data.aws_vpc.default.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 resource "aws_lambda_function" "channel_dispatcher" {
   function_name = "channel-dispatcher"
 
