@@ -76,6 +76,7 @@ CREATE TABLE `order` (
     notes TEXT,
     payment_method VARCHAR(100),
     used_menu BLOB,
+    current_cart JSON,
     last_message_at TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
