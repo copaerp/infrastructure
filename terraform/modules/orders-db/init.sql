@@ -165,5 +165,7 @@ INSERT INTO whatsapp_number (id, unit_id, number, description, meta_number_id) V
 ('dac4da05-05dd-4716-96d7-a29dd7ca81a9', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5', '15556382629', 'WhatsApp Principal', '622466564276838');
 
 INSERT INTO customer (id, business_id, full_name, phone, instagram_user, email, document, birth_date) VALUES
-('6186b034-cb04-4f3b-a029-1ac716af6a84', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Joaquim Pires', '5517997355173', 'jocasrc', 'joaqu1m.pires@hotmail.com', '65463821054', '1990-01-01'),
-('a029c004-7369-40c4-86c1-b9dbe7cee514', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Erick Pio', '5511963107396', 'sloninsk', 'erick.pio@sptech.school', '60625937015', '1990-01-01');
+('6186b034-cb04-4f3b-a029-1ac716af6a84', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Joaquim Pires', '5517997355173', 'na', 'joaqu1m.pires@hotmail.com', '65463821054', '1990-01-01'),
+('a029c004-7369-40c4-86c1-b9dbe7cee514', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Erick Pio', '5511963107396', 'na', 'erick.pio@sptech.school', '60625937015', '1990-01-01'),
+('61863e0f-3467-4d71-8b0d-94f3763a2f5a', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Henrique Medeiros', '5511985598888', 'na', 'henrique.medeiros@sptech.school', '60625937016', '1990-01-01'),
+('3f576114-b60d-4710-8b75-4958a60e2f4f', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Nicoals Gonzaga', '5511948476990', 'na', 'nicolas.gonzaga@sptech.school', '60625937017', '1990-01-01');
