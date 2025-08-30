@@ -11,7 +11,7 @@ variable "ami_id" {
 }
 
 variable "account_id" {
-  default = "390251560541"
+  default = "465964748015"
 }
 
 // IAM Default Role

@@ -23,6 +23,7 @@ module "orders" {
   orders_db_endpoint   = module.orders-db.orders_db_endpoint
   orders_db_name       = module.orders-db.orders_db_name
   iam_role_id          = data.aws_iam_role.existing_role.arn
+  account_id           = var.account_id
 }
 
 module "data" {

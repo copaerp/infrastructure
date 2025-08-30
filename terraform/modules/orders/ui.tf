@@ -59,7 +59,7 @@ resource "aws_ecs_task_definition" "nginx" {
   container_definitions = jsonencode([
     {
       name      = "nginx"
-      image     = "orders-ui-nginx-s3:latest"
+      image     = "${var.account_id}.dkr.ecr.us-east-1.amazonaws.com/orders-ui-nginx-s3:latest"
       essential = true
       portMappings = [
         {
@@ -148,10 +148,10 @@ resource "aws_lb" "this" {
 }
 
 resource "aws_lb_target_group" "this" {
-  name     = "orders-ui-tg"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = data.aws_vpc.default.id
+  name        = "orders-ui-tg"
+  port        = 80
+  protocol    = "HTTP"
+  vpc_id      = data.aws_vpc.default.id
   target_type = "ip"
 }
 
