@@ -128,10 +128,10 @@ INSERT INTO channel (id, name) VALUES
 ('c7f14cd1-7e26-47b5-ae54-4808ddd673ac', 'Site');
 
 INSERT INTO business (id, name, legal_name, cnpj, email, phone, logo_url, industry) VALUES
-('593db8e0-c46c-4e6e-9699-9e12f259e840', 'Pará Lanches', 'Para Lanches', '51.513.888/0001-05', 'paralanches@gmail.com', '15556382629', '', 'Food');
+('593db8e0-c46c-4e6e-9699-9e12f259e840', 'Pará Lanches', 'Para Lanches', '51.513.888/0001-05', 'paralanches@gmail.com', '15551635882', '', 'Food');
 
 INSERT INTO unit (id, business_id, name, phone, postal_code, street_name, street_number, city, state, country, neighborhood, complement) VALUES
-('cc7a84b8-6a4d-42ff-bc37-efc00268ffd5', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Loja Principal', '15556382629', '12345678', 'Rua das Flores', '123', 'São Paulo', 'SP', 'Brasil', 'Jardim das Rosas', '');
+('cc7a84b8-6a4d-42ff-bc37-efc00268ffd5', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Loja Principal', '15551635882', '12345678', 'Rua das Flores', '123', 'São Paulo', 'SP', 'Brasil', 'Jardim das Rosas', '');
 
 INSERT INTO product (id, business_id, name, description, brl_price, category, image_url) VALUES
 ('3f279d5d-5f64-43da-9ef7-538444d31a93', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'X-Burguer Clássico', 'Hambúrguer artesanal com queijo prato, bacon crocante e molho especial no pão brioche', 24.90, 'Lanches', ''),
@@ -162,7 +162,7 @@ INSERT INTO product_in_unit (id, product_id, unit_id) VALUES
 ('cde61d9e-5b5e-4a65-ae12-9e2af6eacabb', '2185006f-8489-4197-a640-dc0f6b0cc3b6', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5');
 
 INSERT INTO whatsapp_number (id, unit_id, number, description, meta_number_id) VALUES
-('dac4da05-05dd-4716-96d7-a29dd7ca81a9', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5', '15556382629', 'WhatsApp Principal', '622466564276838');
+('dac4da05-05dd-4716-96d7-a29dd7ca81a9', 'cc7a84b8-6a4d-42ff-bc37-efc00268ffd5', '15551635882', 'WhatsApp Principal', '789509107576952');
 
 INSERT INTO customer (id, business_id, full_name, phone, instagram_user, email, document, birth_date) VALUES
 ('6186b034-cb04-4f3b-a029-1ac716af6a84', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Joaquim Pires', '5517997355173', 'na', 'joaqu1m.pires@hotmail.com', '65463821054', '1990-01-01'),
