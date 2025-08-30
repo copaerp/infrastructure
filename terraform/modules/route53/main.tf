@@ -18,6 +18,11 @@ resource "aws_route53_zone" "copaerp_site" {
   }
 }
 
+output "copaerp_main_zone_id" {
+  value = aws_route53_zone.copaerp_site.zone_id
+  
+}
+
 resource "aws_route53_record" "n8n_copaerp_site" {
   zone_id = aws_route53_zone.copaerp_site.zone_id
   name    = "n8n.copaerp.site"

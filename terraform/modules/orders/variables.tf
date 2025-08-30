@@ -1,5 +1,6 @@
 variable "iam_role_id" {}
 
+variable "route53_main_zone_id" {}
 variable "route53_zone_id" {}
 
 variable "orders_db_username" {}
