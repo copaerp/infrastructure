@@ -29,3 +29,7 @@ module "data" {
   source      = "./modules/data"
   iam_role_id = data.aws_iam_role.existing_role.arn
 }
+
+module "ecr" {
+  source = "./modules/ecr"
+}
