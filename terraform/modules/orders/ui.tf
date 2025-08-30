@@ -3,55 +3,20 @@ variable "domain_name" {
 }
 
 # ----------------------------
-# S3 Bucket para site estático
+# S3 Bucket (arquivos buildados)
 # ----------------------------
 resource "aws_s3_bucket" "frontend" {
   bucket = "copaerp-orders-ui-bucket"
-
-  tags = {
-    Name = "orders-ui"
-  }
-}
-
-resource "aws_s3_bucket_ownership_controls" "frontend" {
-  bucket = aws_s3_bucket.frontend.id
-  rule {
-    object_ownership = "BucketOwnerEnforced"
-  }
-}
-
-resource "aws_s3_bucket_public_access_block" "frontend" {
-  bucket                  = aws_s3_bucket.frontend.id
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
 }
 
 # ----------------------------
-# Origin Access Control (OAC) para CloudFront
-# ----------------------------
-resource "aws_cloudfront_origin_access_control" "oac" {
-  name                              = "orders-ui-oac"
-  description                       = "OAC for orders-ui"
-  origin_access_control_origin_type = "s3"
-  signing_behavior                  = "always"
-  signing_protocol                  = "sigv4"
-}
-
-# ----------------------------
-# Certificado SSL (ACM)
+# ACM Certificate
 # ----------------------------
 resource "aws_acm_certificate" "cert" {
   domain_name       = var.domain_name
   validation_method = "DNS"
-
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
-# Validação via DNS no Route53
 resource "aws_route53_record" "cert_validation" {
   for_each = {
     for dvo in aws_acm_certificate.cert.domain_validation_options : dvo.domain_name => {
@@ -74,51 +39,180 @@ resource "aws_acm_certificate_validation" "cert" {
 }
 
 # ----------------------------
-# CloudFront Distribution
+# ECS Cluster
 # ----------------------------
-resource "aws_cloudfront_distribution" "frontend" {
-  enabled             = true
-  default_root_object = "index.html"
-
-  origin {
-    domain_name              = aws_s3_bucket.frontend.bucket_regional_domain_name
-    origin_id                = aws_s3_bucket.frontend.id
-    origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
-  }
-
-  default_cache_behavior {
-    target_origin_id       = aws_s3_bucket.frontend.id
-    viewer_protocol_policy = "redirect-to-https"
-
-    allowed_methods = ["GET", "HEAD", "OPTIONS"]
-    cached_methods  = ["GET", "HEAD"]
-
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "none"
-      }
-    }
-  }
-
-  price_class = "PriceClass_100" # muda se quiser usar mais edge locations
-
-  restrictions {
-    geo_restriction {
-      restriction_type = "none"
-    }
-  }
-
-  viewer_certificate {
-    acm_certificate_arn = aws_acm_certificate_validation.cert.certificate_arn
-    ssl_support_method  = "sni-only"
-  }
-
-  depends_on = [aws_acm_certificate_validation.cert]
+resource "aws_ecs_cluster" "this" {
+  name = "orders-ui-cluster"
 }
 
 # ----------------------------
-# DNS no Route53
+# ECS Task Definition (NGINX)
+# ----------------------------
+resource "aws_ecs_task_definition" "nginx" {
+  family                   = "orders-ui-task"
+  cpu                      = "256"
+  memory                   = "512"
+  network_mode             = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+  execution_role_arn       = var.iam_role_id
+
+  container_definitions = jsonencode([
+    {
+      name      = "nginx"
+      image     = "nginx:stable"
+      essential = true
+      portMappings = [
+        {
+          containerPort = 80
+          hostPort      = 80
+          protocol      = "tcp"
+        }
+      ]
+      command = [
+        "/bin/sh",
+        "-c",
+        "aws s3 sync s3://${aws_s3_bucket.frontend.bucket} /usr/share/nginx/html && nginx -g 'daemon off;'"
+      ]
+    }
+  ])
+}
+
+# ----------------------------
+# VPC + Networking
+# ----------------------------
+data "aws_vpc" "default" {
+  default = true
+}
+
+data "aws_subnets" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
+}
+
+resource "aws_security_group" "alb_sg" {
+  vpc_id = data.aws_vpc.default.id
+  name   = "orders-ui-alb-sg"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_security_group" "ecs_sg" {
+  vpc_id = data.aws_vpc.default.id
+  name   = "orders-ui-ecs-sg"
+
+  ingress {
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb_sg.id]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+# ----------------------------
+# ALB
+# ----------------------------
+resource "aws_lb" "this" {
+  name               = "orders-ui-alb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.alb_sg.id]
+  subnets            = data.aws_subnets.default.ids
+}
+
+resource "aws_lb_target_group" "this" {
+  name     = "orders-ui-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = data.aws_vpc.default.id
+
+  health_check {
+    path = "/"
+  }
+}
+
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = aws_lb.this.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+resource "aws_lb_listener" "https" {
+  load_balancer_arn = aws_lb.this.arn
+  port              = 443
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = aws_acm_certificate_validation.cert.certificate_arn
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.this.arn
+  }
+}
+
+# ----------------------------
+# ECS Service
+# ----------------------------
+resource "aws_ecs_service" "nginx" {
+  name            = "orders-ui-svc"
+  cluster         = aws_ecs_cluster.this.id
+  task_definition = aws_ecs_task_definition.nginx.arn
+  desired_count   = 1
+  launch_type     = "FARGATE"
+
+  network_configuration {
+    subnets          = data.aws_subnets.default.ids
+    security_groups  = [aws_security_group.ecs_sg.id]
+    assign_public_ip = true
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.this.arn
+    container_name   = "nginx"
+    container_port   = 80
+  }
+
+  depends_on = [aws_lb_listener.https]
+}
+
+# ----------------------------
+# Route53 record
 # ----------------------------
 resource "aws_route53_record" "frontend_alias" {
   zone_id = var.route53_main_zone_id
@@ -126,8 +220,8 @@ resource "aws_route53_record" "frontend_alias" {
   type    = "A"
 
   alias {
-    name                   = aws_cloudfront_distribution.frontend.domain_name
-    zone_id                = aws_cloudfront_distribution.frontend.hosted_zone_id
+    name                   = aws_lb.this.dns_name
+    zone_id                = aws_lb.this.zone_id
     evaluate_target_health = false
   }
 }
