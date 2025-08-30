@@ -59,7 +59,7 @@ resource "aws_ecs_task_definition" "nginx" {
   container_definitions = jsonencode([
     {
       name      = "nginx"
-      image     = "nginx:stable"
+      image     = "orders-ui-nginx-s3:latest"
       essential = true
       portMappings = [
         {
@@ -71,7 +71,7 @@ resource "aws_ecs_task_definition" "nginx" {
       command = [
         "/bin/sh",
         "-c",
-        "nginx -g 'daemon off;'"
+        "aws s3 sync s3://${aws_s3_bucket.frontend.bucket} /usr/share/nginx/html && nginx -g 'daemon off;'"
       ]
     }
   ])
