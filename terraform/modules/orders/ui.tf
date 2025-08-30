@@ -68,15 +68,10 @@ resource "aws_ecs_task_definition" "nginx" {
           protocol      = "tcp"
         }
       ]
-      environment = [
-        {
-          name  = "S3_BUCKET"
-          value = aws_s3_bucket.frontend.bucket
-        },
-        {
-          name  = "SYNC_DEST"
-          value = "/usr/share/nginx/html"
-        }
+      command = [
+        "/bin/sh",
+        "-c",
+        "aws s3 sync s3://${aws_s3_bucket.frontend.bucket} /usr/share/nginx/html && nginx -g 'daemon off;'"
       ]
     }
   ])
