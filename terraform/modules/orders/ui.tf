@@ -1,9 +1,6 @@
 variable "domain_name" {
   default = "orders.copaerp.site"
 }
-variable "zone_id" {
-  default = var.route53_main_zone_id
-}
 
 # ----------------------------
 # S3 Bucket (arquivos buildados)
@@ -98,7 +95,7 @@ resource "aws_lb_listener" "orders_ui" {
 
 # DNS
 resource "aws_route53_record" "orders_ui" {
-  zone_id = var.zone_id
+  zone_id = var.route53_main_zone_id
   name    = var.domain_name
   type    = "A"
 
