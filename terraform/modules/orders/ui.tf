@@ -21,7 +21,7 @@ resource "aws_ecs_task_definition" "orders_ui" {
   network_mode             = "awsvpc"
   cpu                      = "256"
   memory                   = "512"
-  execution_role_arn       = aws_iam_role.ecs_task_execution.arn
+  execution_role_arn       = var.iam_role_id
 
   container_definitions = jsonencode([{
     name  = "orders-ui"
