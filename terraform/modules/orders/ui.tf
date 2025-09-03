@@ -104,12 +104,17 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
+resource "aws_iam_instance_profile" "nginx_ec2_instance_profile" {
+  name = "nginx_ec2-instance-profile"
+  role = var.iam_role_name
+}
+
 resource "aws_instance" "nginx_ec2" {
   ami                  = data.aws_ami.amazon_linux.id
   instance_type        = "t2.micro"
   security_groups      = [aws_security_group.nginx_sg.name]
   key_name             = var.key_name
-  iam_instance_profile = var.iam_role_name
+  iam_instance_profile = aws_iam_instance_profile.nginx_ec2_instance_profile.name
 
   user_data = <<-EOF
 #!/bin/bash
