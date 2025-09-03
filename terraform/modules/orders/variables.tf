@@ -9,3 +9,6 @@ variable "orders_db_endpoint" {}
 variable "orders_db_name" {}
 
 variable "account_id" {}
+
+variable "key_name" {}
+variable "iam_role_name" {}

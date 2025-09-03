@@ -24,6 +24,8 @@ module "orders" {
   orders_db_name       = module.orders-db.orders_db_name
   iam_role_id          = data.aws_iam_role.existing_role.arn
   account_id           = var.account_id
+  key_name             = var.key_name
+  iam_role_name        = var.iam_role_name
 }
 
 module "data" {

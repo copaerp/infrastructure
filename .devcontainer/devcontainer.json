@@ -4,8 +4,9 @@
 	"service": "devcontainer",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"features": {
-		"ghcr.io/devcontainers/features/aws-cli:1.1.1": {},
-		"ghcr.io/devcontainers/features/terraform:1": {}
+		"ghcr.io/devcontainers/features/terraform:1": {},
+		"ghcr.io/devcontainers/features/aws-cli:1": {},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
 	"customizations": {
 		"vscode": {
