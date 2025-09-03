@@ -81,6 +81,15 @@ resource "aws_security_group" "nginx_sg" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTP"
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTPS"
   }
 
   egress {
@@ -147,10 +156,17 @@ systemctl restart nginx
               EOF
 
   tags = {
-    Name = "nginx-ec2"
+    Name        = "nginx-ec2"
+    Environment = "production"
+    Managed-by  = "terraform"
   }
 }
 
-output "ec2_public_ip" {
-  value = aws_instance.nginx_ec2.public_ip
+resource "aws_eip" "nginx_eip" {
+  instance   = aws_instance.nginx_ec2.id
+  depends_on = [aws_instance.nginx_ec2]
+}
+
+output "nginx_elastic_ip" {
+  value = aws_eip.nginx_eip.public_ip
 }
