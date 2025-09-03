@@ -99,14 +99,24 @@ cat > /etc/nginx/conf.d/react.conf <<EOC
 server {
     listen 80;
     server_name orders.copaerp.site;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name orders.copaerp.site;
 
     root /usr/share/nginx/html;
-    index index.html index.htm;
+    index index.html;
+
+    ssl_certificate /etc/letsencrypt/live/orders.copaerp.site/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/orders.copaerp.site/privkey.pem;
 
     location / {
-        try_files \$uri /index.html;
+        try_files $uri /index.html;
     }
 }
+
 EOC
 
 # Reinicia Nginx
