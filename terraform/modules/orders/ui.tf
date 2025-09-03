@@ -111,10 +111,16 @@ resource "aws_iam_instance_profile" "nginx_ec2_instance_profile" {
 
 resource "aws_instance" "nginx_ec2" {
   ami                  = data.aws_ami.amazon_linux.id
-  instance_type        = "t2.micro"
-  security_groups      = [aws_security_group.nginx_sg.name]
   key_name             = var.key_name
+  instance_type        = "t2.micro"
   iam_instance_profile = aws_iam_instance_profile.nginx_ec2_instance_profile.name
+
+  security_groups = [aws_security_group.nginx_sg.name]
+
+  root_block_device {
+    volume_size = 20
+    volume_type = "gp2"
+  }
 
   user_data = <<-EOF
 #!/bin/bash
@@ -127,12 +133,12 @@ systemctl start nginx
 cat > /etc/nginx/conf.d/react.conf <<EOC
 server {
     listen 80;
-    server_name ${var.domain_name};
+    server_name orders.copaerp.site;
 
     location / {
-        proxy_pass http://${aws_s3_bucket_website_configuration.frontend.website_endpoint};
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
+        proxy_pass http://copaerp-orders-ui-bucket.s3-website-us-east-1.amazonaws.com/;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
     }
 }
 EOC
