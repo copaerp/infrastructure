@@ -68,7 +68,6 @@ resource "aws_route53_record" "frontend" {
 resource "aws_security_group" "nginx_sg" {
   name        = "nginx_sg"
   description = "Allow HTTP and SSH"
-  vpc_id      = data.aws_vpc.default.id
 
   ingress {
     from_port   = 22
