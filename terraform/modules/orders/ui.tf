@@ -81,47 +81,38 @@ resource "aws_instance" "nginx_ec2" {
 
   user_data = <<-EOF
 #!/bin/bash
-# Atualiza o sistema e instala Nginx e AWS CLI
 yum update -y
-amazon-linux-extras install -y nginx1
-yum install -y awscli
+amazon-linux-extras install -y nginx1 epel
+yum install -y awscli certbot python3-certbot-nginx
+
 systemctl enable nginx
 systemctl start nginx
 
-# Cria diretório para o site se não existir
 mkdir -p /usr/share/nginx/html
 
-# Sincroniza arquivos do S3 para a EC2
 aws s3 sync s3://copaerp-orders-ui-bucket /usr/share/nginx/html
 
-# Configura Nginx para servir React SPA
 cat > /etc/nginx/conf.d/react.conf <<EOC
 server {
     listen 80;
-    server_name orders.copaerp.site;
-    return 301 https://$host$request_uri;
-}
-
-server {
-    listen 443 ssl;
     server_name orders.copaerp.site;
 
     root /usr/share/nginx/html;
     index index.html;
 
-    ssl_certificate /etc/letsencrypt/live/orders.copaerp.site/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/orders.copaerp.site/privkey.pem;
-
     location / {
-        try_files $uri /index.html;
+        try_files \$uri /index.html;
     }
 }
-
 EOC
 
-# Reinicia Nginx
 systemctl restart nginx
 
+sleep 10
+
+certbot --nginx -d orders.copaerp.site --non-interactive --agree-tos -m seu-email@exemplo.com
+
+certbot renew --dry-run
               EOF
 
   tags = {
