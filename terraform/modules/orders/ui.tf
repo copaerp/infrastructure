@@ -141,7 +141,10 @@ systemctl restart nginx
 # --- Adição do Cronjob ---
 cat > /etc/cron.d/s3_sync_nginx <<CRON_EOF
 # Sincroniza o bucket S3 e reinicia o Nginx a cada 5 minutos
-*/5 * * * * root aws s3 sync s3://copaerp-orders-ui-bucket /usr/share/nginx/html --delete && systemctl reload nginx > /dev/null 2>&1
+*/5 * * * * root \
+aws s3 sync s3://copaerp-orders-ui-bucket /usr/share/nginx/html --delete --exclude "index.html" && \
+aws s3 cp s3://copaerp-orders-ui-bucket/index.html /usr/share/nginx/html/index.html --cache-control "no-cache,no-store,must-revalidate" && \
+systemctl reload nginx > /dev/null 2>&1
 CRON_EOF
 # -------------------------
 
