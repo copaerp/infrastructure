@@ -79,7 +79,7 @@ resource "aws_instance" "nginx_ec2" {
     volume_type = "gp2"
   }
 
-  user_data = <<-EOF
+user_data = <<-EOF
 #!/bin/bash
 yum update -y
 amazon-linux-extras install -y nginx1 epel
@@ -137,6 +137,13 @@ server {
 EOC
 
 systemctl restart nginx
+
+# --- Adição do Cronjob ---
+cat > /etc/cron.d/s3_sync_nginx <<CRON_EOF
+# Sincroniza o bucket S3 e reinicia o Nginx a cada 5 minutos
+*/5 * * * * root aws s3 sync s3://copaerp-orders-ui-bucket /usr/share/nginx/html && systemctl reload nginx > /dev/null 2>&1
+CRON_EOF
+# -------------------------
 
 certbot renew --dry-run
               EOF
