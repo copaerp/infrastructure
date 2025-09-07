@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       terraform_command:
-        description: "Terraform command to run (e.g. plan, apply -auto-approve, destroy -auto-approve)"
+        description: "Terraform command to run (e.g. plan, apply, destroy)"
         required: true
-        default: "plan"
+        default: "apply"
 
 jobs:
   terraform:

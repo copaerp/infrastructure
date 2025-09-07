@@ -3,3 +3,4 @@ terraform-state
 .terraform**
 **.env
 bootstrap-setup-**
+.vscode
