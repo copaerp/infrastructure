@@ -69,12 +69,15 @@ CREATE TABLE channel (
 
 CREATE TABLE `order` (
     id CHAR(36) PRIMARY KEY,
+    display_id VARCHAR(12),
     customer_id CHAR(36),
     unit_id CHAR(36),
     channel_id CHAR(36),
     status VARCHAR(50),
+    post_checkout_status VARCHAR(50),
     notes TEXT,
     payment_method VARCHAR(100),
+    address VARCHAR(255),
     used_menu BLOB,
     current_cart JSON,
     last_message_at TIMESTAMP,
