@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "general_bronze" {
-  bucket = "copa-general-bronze-v2"
+  bucket = "copa-general-bronze-v3"
   tags = {
-    Name = "copa-general-bronze-v2"
+    Name = "copa-general-bronze-v3"
   }
 }
 
