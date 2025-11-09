@@ -7,7 +7,7 @@ module "n8n" {
 
 module "route53" {
   source           = "./modules/route53"
-  # n8n_elastic_ip   = module.n8n.n8n_elastic_ip
+  n8n_elastic_ip   = module.n8n.n8n_elastic_ip
   nginx_elastic_ip = module.orders.nginx_elastic_ip
 }
 
