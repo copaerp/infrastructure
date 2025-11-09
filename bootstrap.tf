@@ -4,7 +4,7 @@ provider "aws" {
 
 # Bucket
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "copaerp-terraform-lock-v2"
+  bucket = "copaerp-terraform-lock-v3"
 
   lifecycle {
     prevent_destroy = true

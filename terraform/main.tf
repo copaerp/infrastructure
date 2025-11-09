@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket         = "copaerp-terraform-lock-v2"
+    bucket         = "copaerp-terraform-lock-v3"
     use_lockfile   = true
     key            = "terraform.tfstate"
     region         = "us-east-1"
