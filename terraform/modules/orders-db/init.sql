@@ -42,6 +42,7 @@ CREATE TABLE unit (
     country VARCHAR(100),
     neighborhood VARCHAR(100),
     complement VARCHAR(255),
+    ifood_merchant_id CHAR(36),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (business_id) REFERENCES business(id)
@@ -80,6 +81,7 @@ CREATE TABLE `order` (
     address VARCHAR(255),
     used_menu BLOB,
     current_cart JSON,
+    ifood_id CHAR(36),
     last_message_at TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -131,10 +133,10 @@ INSERT INTO channel (id, name) VALUES
 ('c7f14cd1-7e26-47b5-ae54-4808ddd673ac', 'Site');
 
 INSERT INTO business (id, name, legal_name, cnpj, email, phone, logo_url, industry) VALUES
-('593db8e0-c46c-4e6e-9699-9e12f259e840', 'Pará Lanches', 'Para Lanches', '51.513.888/0001-05', 'paralanches@gmail.com', '15551635882', '', 'Food');
+('593db8e0-c46c-4e6e-9699-9e12f259e840', 'Pará Lanches', 'Para Lanches', '51.513.888/0001-05', 'paralanches@gmail.com', '15551635882', '', '');
 
-INSERT INTO unit (id, business_id, name, phone, postal_code, street_name, street_number, city, state, country, neighborhood, complement) VALUES
-('cc7a84b8-6a4d-42ff-bc37-efc00268ffd5', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Loja Principal', '15551635882', '12345678', 'Rua das Flores', '123', 'São Paulo', 'SP', 'Brasil', 'Jardim das Rosas', '');
+INSERT INTO unit (id, business_id, name, phone, postal_code, street_name, street_number, city, state, country, neighborhood, complement, ifood_merchant_id) VALUES
+('cc7a84b8-6a4d-42ff-bc37-efc00268ffd5', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'Loja Principal', '15551635882', '12345678', 'Rua das Flores', '123', 'São Paulo', 'SP', 'Brasil', 'Jardim das Rosas', '', 'cd6a4cb7-4ec9-4294-bd5e-193aff44701f');
 
 INSERT INTO product (id, business_id, name, description, brl_price, category, image_url) VALUES
 ('3f279d5d-5f64-43da-9ef7-538444d31a93', '593db8e0-c46c-4e6e-9699-9e12f259e840', 'X-Burguer Clássico', 'Hambúrguer artesanal com queijo prato, bacon crocante e molho especial no pão brioche', 24.90, 'Lanches', ''),
