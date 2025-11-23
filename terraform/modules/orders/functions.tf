@@ -132,3 +132,27 @@ resource "aws_lambda_function" "ifood_sync" {
   timeout     = 30
   memory_size = 128
 }
+
+resource "aws_lambda_permission" "allow_eventbridge_ifood_sync" {
+  statement_id  = "AllowExecutionFromEventBridge"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.ifood_sync.function_name
+  principal     = "scheduler.amazonaws.com"
+  source_arn    = aws_scheduler_schedule.ifood_sync.arn
+}
+
+resource "aws_scheduler_schedule" "ifood_sync" {
+  name       = "ifood-sync-schedule"
+  group_name = "default"
+
+  flexible_time_window {
+    mode = "OFF"
+  }
+
+  schedule_expression = "rate(3 minutes)"
+
+  target {
+    arn      = aws_lambda_function.ifood_sync.arn
+    role_arn = var.iam_role_id
+  }
+}
