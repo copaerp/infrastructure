@@ -15,6 +15,12 @@ locals {
     orders_db_endpoint        = var.orders_db_endpoint
     orders_db_name            = var.orders_db_name
     role_arn                  = var.iam_role_id
+    ifood_client_id           = "c2530aee-f8c3-47ab-a946-55a2d1bcef81"
+    ifood_client_secret       = "hjh82u6s5ge6p1zw2w99j51sqzoh0889kw1iweeviuts3v6gppduiz1hce7zr33hrlnol48qwz0q9b00xaoewyd8f0a0rchwa4e"
+    ifood_auth_url            = "https://merchant-api.ifood.com.br/authentication/v1.0/oauth/token"
+    ifood_events_url          = "https://merchant-api.ifood.com.br/order/v1.0/events:polling"
+    ifood_order_url           = "https://merchant-api.ifood.com.br/order/v1.0/orders/{order_id}"
+    ifood_channel_id          = "8b848fb0-2b67-405c-998e-51df7324b665"
   }
 
   ot_envs = {
