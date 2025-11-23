@@ -95,3 +95,30 @@ resource "aws_lambda_function" "orders_timeout" {
   timeout     = 30
   memory_size = 128
 }
+
+resource "aws_lambda_layer_version" "ifood_sync_dependencies" {
+  layer_name               = "ifood-sync-dependencies"
+  filename                 = "${path.root}/dummy_layer.zip"
+  compatible_runtimes      = ["python3.13"]
+  compatible_architectures = ["arm64"]
+}
+
+resource "aws_lambda_function" "ifood_sync" {
+  function_name = "ifood-sync"
+
+  role     = var.iam_role_id
+  handler  = "lambda_function.lambda_handler"
+  runtime  = "python3.13"
+  filename = local.dummy_source_file
+
+  architectures = local.lambda_architectures
+
+  layers = [aws_lambda_layer_version.ifood_sync_dependencies.arn]
+
+  environment {
+    variables = local.ot_envs_group
+  }
+
+  timeout     = 30
+  memory_size = 128
+}
