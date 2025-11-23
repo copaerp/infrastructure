@@ -107,6 +107,10 @@ resource "aws_lambda_layer_version" "ifood_sync_dependencies" {
   filename                 = "${path.root}/dummy_layer.zip"
   compatible_runtimes      = ["python3.13"]
   compatible_architectures = ["arm64"]
+
+  lifecycle {
+    ignore_changes = [filename, source_code_hash]
+  }
 }
 
 resource "aws_lambda_function" "ifood_sync" {
